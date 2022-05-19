@@ -2,9 +2,12 @@ package MethodsRefresherLab;
 
 import java.util.Scanner;
 
+// #4
 public class CalculateAreas {
     // create a scanner object in order to get user input
     public static Scanner userScanner = new Scanner(System.in);
+
+    // #6-8
 
     // Circle Scenario
     public static void runCircle() {
@@ -107,6 +110,7 @@ public class CalculateAreas {
         }
     }
     // main method
+    // #5
     public static void main(String args[]) {
         // run user prompt
         userChoice();
