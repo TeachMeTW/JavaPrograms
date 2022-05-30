@@ -226,14 +226,19 @@ public class TestBaby {
     // Accessor
     public static void funcTest() {
         System.out.println ("This tests all the functions; prints name, age, eye color, hair, is clean, is hungry, race, and status");
-        System.out.println(babyList.get(3).name);
-        System.out.println(babyList.get(3).age);
-        System.out.println(babyList.get(3).eyeColor);
-        System.out.println(babyList.get(3).hairColor);
-        System.out.println(babyList.get(3).isClean);
-        System.out.println(babyList.get(3).isHungry);
-        System.out.println(babyList.get(3).race);
-        System.out.println(babyList.get(3).status);
+        for (int i = 0; i < babyList.size(); i++) {
+            System.out.println(" ");
+            System.out.println(babyList.get(i).name);
+            System.out.println(babyList.get(i).age);
+            System.out.println(babyList.get(i).eyeColor);
+            System.out.println(babyList.get(i).hairColor);
+            System.out.println(babyList.get(i).isClean);
+            System.out.println(babyList.get(i).isHungry);
+            System.out.println(babyList.get(i).race);
+            System.out.println(babyList.get(i).status);
+            System.out.println(" ");
+        }
+
     }
 
     // main method
