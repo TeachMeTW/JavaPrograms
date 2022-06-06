@@ -32,5 +32,6 @@ public class Info {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 }

@@ -34,6 +34,7 @@ public class Menu{
         frame.setVisible(true);
         background.add(backgroundLabel);
         frame.add(background);
+        frame.setLocationRelativeTo(null);
         
         
     }
@@ -46,7 +47,8 @@ public class Menu{
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == playButton) {
-                    
+                    frame.dispose();
+                    Player p = new Player();
                 }
             }
         });
