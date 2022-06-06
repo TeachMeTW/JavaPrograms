@@ -23,6 +23,7 @@ public class Prompt extends JFrame {
         setLocationRelativeTo(null);
         y.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 Menu m = new Menu();
                 
             }

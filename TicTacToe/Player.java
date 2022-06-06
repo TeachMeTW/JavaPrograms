@@ -40,7 +40,7 @@ public class Player extends JFrame {
                         TTTV1 t = new TTTV1();
                     }
                     else {
-                        
+                        TTTV2 t2 = new TTTV2();
                     }
                     // System.out.println(playercount);
                     
