@@ -17,8 +17,10 @@ public class TTTV2 extends JFrame {
     boolean[] players = new boolean[col_row];
     boolean gameEnd = false;
     int count = 0;
+    int seq = 0;
 
     String[] pIcon = {"X","O","A","B","C","D","E","F", "G", "H"};
+    Color[] pColors = {Color.red, Color.blue, Color.yellow, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.cyan, Color.DARK_GRAY, Color.BLACK , new Color(5,12,25)};
 
     TTTV2() {
         setTitle("Tic Tac Toe V2");
@@ -59,18 +61,18 @@ public class TTTV2 extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     for(int i=0;i<size;i++) {
                         if(e.getSource()==buttons[i]) {
-                            for (int k = 0; k < (col_row-1); k++ ) { // 3 players
+                            for (int k = 0; k < (col_row-1); k++ ) { 
                                 if (players[k]) {
-                                    // next active player found
+                                    
                                     if(buttons[i].getText()=="") {
-                                        buttons[i].setForeground(new Color(0,0,255));
+                                        buttons[i].setForeground(pColors[k]);
                                         buttons[i].setText(pIcon[k]);
                                         players[k]=false;
                                         int j = (k + 1) % (col_row-1); // index for next active player
                                         players[j] = true; // mark next active player
                                         txt.setText(pIcon[j] + " turn");
                                         checkCondition();
-                                        break; // leave inner loop
+                                        break; 
                                     }
                                 }
                         
@@ -90,6 +92,25 @@ public class TTTV2 extends JFrame {
 
 
     public void checkCondition() {
+
+        // Check for horiz
+        for (int k = 1; k<col_row+1;k++) {
+            for(int i = (k-1)*col_row, j = i+1;  j < k*col_row && i < k*col_row; i++, j++) {
+                //System.out.println("Current b1: " + buttons[i].getText() + " Current b2: " + buttons[j].getText() + " char: " + pIcon[z]);
+                if(buttons[i].getText() == buttons[j].getText() && (buttons[i].getText() != "" && buttons[j].getText() != "")) {
+                    seq++;
+                    //System.out.println("\n Matching " + seq);
+                }
+                if (seq == Player.winCon-1) {
+                    Won(buttons[i].getText());
+                    break;
+                    
+                }
+            }
+            seq = 0;
+        }
+
+
 
 
         for (int i = 0; i < size; i++) {
@@ -111,32 +132,16 @@ public class TTTV2 extends JFrame {
         }
         txt.setText("DRAW");
         Prompt p = new Prompt();
-        
+        //dispose();
         
     }
-    public void xWon(int n1, int n2, int n3) {
-        gameEnd = true;
-        buttons[n1].setBackground(Color.GREEN);
-        buttons[n2].setBackground(Color.GREEN);
-        buttons[n3].setBackground(Color.GREEN);
-
+    public void Won(String winner) {
         for (int i = 0; i < size; i++) {
             buttons[i].setEnabled(false);
         }
-        txt.setText("X Player wins");
+        txt.setText(winner + " Player wins");
         Prompt p = new Prompt();
+        //dispose();
     }
 
-    public void yWon(int n1, int n2, int n3) {
-        gameEnd = true;
-        buttons[n1].setBackground(Color.GREEN);
-        buttons[n2].setBackground(Color.GREEN);
-        buttons[n3].setBackground(Color.GREEN);
-
-        for (int i = 0; i < size; i++) {
-            buttons[i].setEnabled(false);
-        }
-        txt.setText("O Player wins");
-        Prompt p = new Prompt();
-    }
 }
