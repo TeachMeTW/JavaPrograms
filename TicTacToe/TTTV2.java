@@ -19,6 +19,11 @@ public class TTTV2 extends JFrame {
     int count = 0;
     int seq = 0;
 
+    Map<String, Integer> pairV = new HashMap<String, Integer>();
+    Map<String, Integer> pairH = new HashMap<String, Integer>();
+    Map<String, Integer> pairDR = new HashMap<String, Integer>();
+    Map<String, Integer> pairDL = new HashMap<String, Integer>();
+
     String[] pIcon = {"X","O","A","B","C","D","E","F", "G", "H"};
     Color[] pColors = {Color.red, Color.blue, Color.yellow, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.cyan, Color.DARK_GRAY, Color.BLACK , new Color(5,12,25)};
 
@@ -47,6 +52,16 @@ public class TTTV2 extends JFrame {
         title.setLayout(new BorderLayout());
         title.setBounds(0,0,800,100);
 
+        // Fill hashmap
+
+        for (int i = 0; i < Player.playercount; i++) {
+            pairH.put(pIcon[i], 0);
+            pairV.put(pIcon[i], 0);
+            pairDL.put(pIcon[i], 0);
+            pairDR.put(pIcon[i], 0);
+        }
+
+        
         buttonPanel.setLayout(new GridLayout(col_row,col_row));
         for (int g = 0; g < col_row; g++) {
             players[g] = true;
@@ -88,6 +103,7 @@ public class TTTV2 extends JFrame {
         add(title,BorderLayout.NORTH);
         add(buttonPanel);
         setLocationRelativeTo(null);
+        
     }
 
 
@@ -109,9 +125,24 @@ public class TTTV2 extends JFrame {
             }
             seq = 0;
         }
-
-
-
+        // check for vert
+        checkVert(0);
+        checkDiag(0);
+        // Check for diag
+        // for (int i = 0, j = i+col_row; i<size-1 && j < size; i++, j++) {
+        //     System.out.println("Current b1: " + buttons[i].getText() + " Current b2: " + buttons[j].getText());
+        //     if(buttons[i].getText() == buttons[j].getText() && (buttons[i].getText() != "" && buttons[j].getText() != "")) {
+        //         seq++;
+        //         System.out.println("\n Matching " + seq);
+        //     }
+        //     if (seq == Player.winCon-1) {
+        //         Won(buttons[i].getText());
+        //         break;
+                
+        //     }
+        
+        // }
+        seq = 0;
 
         for (int i = 0; i < size; i++) {
             if(buttons[i].getText() != "") {
@@ -124,6 +155,62 @@ public class TTTV2 extends JFrame {
         count = 0;
 
     }
+
+    public void checkVert(int start) {
+        
+        for (int i = start, j = i+col_row; i<size-1 && j < size; i++, j++) {
+            // System.out.println("Current b1: " + buttons[i].getText() + " Current b2: " + buttons[j].getText());
+            if(buttons[i].getText() == buttons[j].getText() && (buttons[i].getText() != "" && buttons[j].getText() != "")) {
+                pairV.put(buttons[j].getText(), pairV.get(buttons[j].getText())+1);
+                buttons[i].setText(buttons[j].getText()+" ");
+                checkVert(j);
+                // System.out.println("\n Matching " + seq);
+            }
+            for (Map.Entry <String, Integer> entry: pairV.entrySet()) {
+                if (entry.getValue() == Player.winCon-1) {
+                    Won(entry.getKey());
+                    break;
+                }
+            }
+        }
+    }
+
+    public void checkDiag(int start) {
+        for (int i = start, j = i+col_row+1; i<size-1 && j < size; i++, j++) {
+            int k = i+col_row-1;
+            if (k >= col_row) {
+                if((buttons[i].getText() == buttons[k].getText() && (buttons[i].getText() != "" && buttons[k].getText() != ""))) {
+                    pairDL.put(buttons[k].getText(), pairDL.get(buttons[k].getText())+1);
+                    buttons[i].setText(buttons[k].getText()+" ");
+                    checkDiag(j);
+                    System.out.println("\n Matching " + seq);
+                }
+                for (Map.Entry <String, Integer> entry: pairDL.entrySet()) {
+                    if (entry.getValue() == Player.winCon-1) {
+                        Won(entry.getKey());
+                        break;
+                    }
+                }
+            }
+            if((buttons[i].getText() == buttons[j].getText() && (buttons[i].getText() != "" && buttons[j].getText() != ""))) {
+                pairDR.put(buttons[j].getText(), pairDR.get(buttons[j].getText())+1);
+                buttons[i].setText(buttons[j].getText()+" ");
+                checkDiag(j);
+                System.out.println("\n Matching " + seq);
+            }
+            for (Map.Entry <String, Integer> entry: pairDR.entrySet()) {
+                if (entry.getValue() == Player.winCon-1) {
+                    Won(entry.getKey());
+                    break;
+                }
+            }
+
+
+            // System.out.println("Current b1: " + buttons[i].getText() + " Current b2: " + buttons[j].getText());
+
+        }
+    }
+
     public void noWindraw() {
         gameEnd = true;
         for (int j = 0; j < size; j++) {
@@ -131,7 +218,7 @@ public class TTTV2 extends JFrame {
             buttons[j].setEnabled(false);
         }
         txt.setText("DRAW");
-        Prompt p = new Prompt();
+        
         //dispose();
         
     }
@@ -140,7 +227,7 @@ public class TTTV2 extends JFrame {
             buttons[i].setEnabled(false);
         }
         txt.setText(winner + " Player wins");
-        Prompt p = new Prompt();
+        
         //dispose();
     }
 
