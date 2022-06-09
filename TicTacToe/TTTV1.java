@@ -9,10 +9,10 @@ public class TTTV1 extends JFrame {
     JFrame frame = new JFrame();
     JPanel title = new JPanel();
     JPanel buttonPanel = new JPanel();
-    JLabel txt = new JLabel();
-    JButton[] buttons = new JButton[9];
+    static JLabel txt = new JLabel();
+    static JButton[] buttons = new JButton[9];
     boolean pTurn;
-    int count = 0;
+    
 
     TTTV1() {
         setTitle("Tic Tac Toe V1");
@@ -56,7 +56,7 @@ public class TTTV1 extends JFrame {
                                     buttons[i].setText("X");
                                     pTurn=false;
                                     txt.setText("O turn");
-                                    checkCondition();
+                                    TTTV1_Logic.checkCondition();
                                 }
                             }
                             else {
@@ -65,7 +65,7 @@ public class TTTV1 extends JFrame {
                                     buttons[i].setText("O");
                                     pTurn=true;
                                     txt.setText("X turn");
-                                    checkCondition();
+                                    TTTV1_Logic.checkCondition();
                                 }
                             }
                         }			
@@ -81,100 +81,5 @@ public class TTTV1 extends JFrame {
     }
 
 
-    public void checkCondition() {
-        if((buttons[0].getText()=="X") && (buttons[1].getText()=="X") && (buttons[2].getText()=="X")) {
-            xWon(0,1,2);
-        }
-        if((buttons[3].getText()=="X") && (buttons[4].getText()=="X") && (buttons[5].getText()=="X")) {
-            xWon(3,4,5);
-        }
-        if((buttons[6].getText()=="X") && (buttons[7].getText()=="X") && (buttons[8].getText()=="X")) {
-            xWon(6,7,8);
-        }
-        if((buttons[1].getText()=="X") && (buttons[4].getText()=="X") && (buttons[7].getText()=="X")) {
-            xWon(1,4,7);
-        }
-        if((buttons[0].getText()=="X") && (buttons[3].getText()=="X") && (buttons[6].getText()=="X")) {
-            xWon(0,3,6);
-        }
-        if((buttons[2].getText()=="X") && (buttons[5].getText()=="X") && (buttons[8].getText()=="X")) {
-            xWon(2,5,8);
-        }
-        if((buttons[0].getText()=="X") && (buttons[4].getText()=="X") && (buttons[8].getText()=="X")) {
-            xWon(0,4,8);
-        }
-        if((buttons[2].getText()=="X") && (buttons[4].getText()=="X") && (buttons[6].getText()=="X")) {
-            xWon(2,4,6);
-        }
 
-
-        if((buttons[0].getText()=="O") && (buttons[1].getText()=="O") && (buttons[2].getText()=="O")) {
-            yWon(0,1,2);
-        }
-        if((buttons[3].getText()=="O") && (buttons[4].getText()=="O") && (buttons[5].getText()=="O")) {
-            yWon(3,4,5);
-        }
-        if((buttons[6].getText()=="O") && (buttons[7].getText()=="O") && (buttons[8].getText()=="O")) {
-            yWon(6,7,8);
-        }
-        if((buttons[1].getText()=="O") && (buttons[4].getText()=="O") && (buttons[7].getText()=="O")) {
-            yWon(1,4,7);
-        }
-        if((buttons[0].getText()=="O") && (buttons[3].getText()=="O") && (buttons[6].getText()=="O")) {
-            yWon(0,3,6);
-        }
-        if((buttons[2].getText()=="O") && (buttons[5].getText()=="O") && (buttons[8].getText()=="O")) {
-            yWon(2,5,8);
-        }
-        if((buttons[0].getText()=="O") && (buttons[4].getText()=="O") && (buttons[8].getText()=="O")) {
-            yWon(0,4,8);
-        }
-        if((buttons[2].getText()=="O") && (buttons[4].getText()=="O") && (buttons[6].getText()=="O")) {
-            yWon(2,4,6);
-        }
-
-        for (int i = 0; i < 9; i++) {
-            if(buttons[i].getText() != "") {
-                count++;
-            }
-            if(count == 9) {
-                noWindraw();
-            }
-        }
-        count = 0;
-
-    }
-    public void noWindraw() {
-        for (int j = 0; j < 9; j++) {
-            buttons[j].setBackground(Color.GRAY);
-            buttons[j].setEnabled(false);
-        }
-        txt.setText("DRAW");
-        Prompt p = new Prompt();
-        
-        
-    }
-    public void xWon(int n1, int n2, int n3) {
-        buttons[n1].setBackground(Color.GREEN);
-        buttons[n2].setBackground(Color.GREEN);
-        buttons[n3].setBackground(Color.GREEN);
-
-        for (int i = 0; i < 9; i++) {
-            buttons[i].setEnabled(false);
-        }
-        txt.setText("X Player wins");
-        Prompt p = new Prompt();
-    }
-
-    public void yWon(int n1, int n2, int n3) {
-        buttons[n1].setBackground(Color.GREEN);
-        buttons[n2].setBackground(Color.GREEN);
-        buttons[n3].setBackground(Color.GREEN);
-
-        for (int i = 0; i < 9; i++) {
-            buttons[i].setEnabled(false);
-        }
-        txt.setText("O Player wins");
-        Prompt p = new Prompt();
-    }
 }
