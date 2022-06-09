@@ -30,7 +30,7 @@ public class TTTV1 extends JFrame {
         
 
         txt.setBackground(new Color(25,25,25));
-        txt.setForeground(new Color(25,255,0));
+        txt.setForeground(new Color(210,105,30));
         txt.setFont(new Font("Comic Sans MS", Font.BOLD,75));
         txt.setHorizontalAlignment(JLabel.CENTER);
         txt.setText("Tic Tac Toe");
