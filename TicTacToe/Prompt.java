@@ -7,6 +7,8 @@ import java.awt.event.*;
 public class Prompt extends JFrame {
     JPanel p = new JPanel();
     JLabel l = new JLabel("Replay?");
+
+    // replay prompt
     Prompt() {
         setSize(200,200);
         JButton y = new JButton("Yes");
@@ -21,6 +23,10 @@ public class Prompt extends JFrame {
 
         setVisible(true);
         setLocationRelativeTo(null);
+
+
+        // checks which button is pressed and if y go open a new game if not close
+
         y.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();

@@ -6,21 +6,22 @@ import java.util.*;
 import java.awt.event.*;
 
 
-public class TTTV2 extends JFrame {
+public class TTTV2_Board extends JFrame {
     JFrame frame = new JFrame();
     JPanel title = new JPanel();
     JPanel buttonPanel = new JPanel();
+    
     static JLabel txt = new JLabel();
     static int size = (int)Math.pow((Player.playercount+1),2);
-    int col_row = Player.playercount+1; 
-
     static JButton[] buttons = new JButton[size];
+
+    int col_row = Player.playercount+1; 
     boolean[] players = new boolean[col_row];
     
     String[] pIcon = {"X","O","A","B","C","D","E","F", "G", "H"};
     Color[] pColors = {Color.red, Color.blue, Color.yellow, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.cyan, Color.DARK_GRAY, Color.BLACK , new Color(5,12,25)};
 
-    TTTV2() {
+    TTTV2_Board() {
         setTitle("Tic Tac Toe V2");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +36,7 @@ public class TTTV2 extends JFrame {
 
 
         txt.setBackground(new Color(25,25,25));
-        txt.setForeground(new Color(210,105,30));
+        txt.setForeground(new Color(255,255,255));
         txt.setFont(new Font("Comic Sans MS", Font.BOLD,75));
         txt.setHorizontalAlignment(JLabel.CENTER);
         txt.setText("Tic Tac Toe");
